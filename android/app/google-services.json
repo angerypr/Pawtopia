@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21368898903",
+    "project_id": "pawtopia-4d2f4",
+    "storage_bucket": "pawtopia-4d2f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21368898903:android:51d97b6c339d8487e62a12",
+        "android_client_info": {
+          "package_name": "com.example.pawtopia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoHIKPykQrmASC8Kg1YEWtrS4wd65Aees"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
