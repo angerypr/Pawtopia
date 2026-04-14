@@ -6,7 +6,6 @@ class AppointmentModel {
   final String serviceId;
   final String userId;
   final String estado;
-
   AppointmentModel({
     required this.id,
     required this.fecha,
@@ -16,7 +15,6 @@ class AppointmentModel {
     required this.userId,
     required this.estado,
   });
-
   Map<String, dynamic> toMap() => {
     'id': id,
     'fecha': fecha.toIso8601String(),
@@ -26,7 +24,6 @@ class AppointmentModel {
     'userId': userId,
     'estado': estado,
   };
-
   factory AppointmentModel.fromMap(Map<String, dynamic> map) => AppointmentModel(
     id: map['id'] ?? '',
     fecha: DateTime.parse(map['fecha']),

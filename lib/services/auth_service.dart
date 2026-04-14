@@ -1,15 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/user_model.dart';
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  // Stream para escuchar cambios de sesión (persistencia)
   Stream<User?> get authStateChanges => _auth.authStateChanges();
-
-  // Registro
   Future<UserModel?> register({
     required String nombre,
     required String email,
@@ -20,7 +15,6 @@ class AuthService {
       email: email,
       password: password,
     );
-
     final user = UserModel(
       id: credential.user!.uid,
       nombre: nombre,
@@ -28,16 +22,12 @@ class AuthService {
       telefono: telefono,
       createdAt: DateTime.now(),
     );
-
     await _firestore
         .collection('users')
         .doc(user.id)
         .set(user.toMap());
-
     return user;
   }
-
-  // Login
   Future<UserModel?> login({
     required String email,
     required String password,
@@ -46,30 +36,22 @@ class AuthService {
       email: email,
       password: password,
     );
-
     final doc = await _firestore
         .collection('users')
         .doc(credential.user!.uid)
         .get();
-
     return UserModel.fromMap(doc.data()!);
   }
-
-  // Logout
   Future<void> logout() async {
     await _auth.signOut();
   }
-
-  // Obtener usuario actual de Firestore
   Future<UserModel?> getCurrentUser() async {
     final firebaseUser = _auth.currentUser;
     if (firebaseUser == null) return null;
-
     final doc = await _firestore
         .collection('users')
         .doc(firebaseUser.uid)
         .get();
-
     if (!doc.exists) return null;
     return UserModel.fromMap(doc.data()!);
   }

@@ -4,7 +4,6 @@ class UserModel {
   final String email;
   final String telefono;
   final DateTime createdAt;
-
   UserModel({
     required this.id,
     required this.nombre,
@@ -12,7 +11,6 @@ class UserModel {
     required this.telefono,
     required this.createdAt,
   });
-
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -22,7 +20,6 @@ class UserModel {
       'createdAt': createdAt.toIso8601String(),
     };
   }
-
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] ?? '',

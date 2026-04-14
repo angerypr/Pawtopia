@@ -5,7 +5,6 @@ class PetModel {
   final String raza;
   final int edad;
   final String ownerId;
-
   PetModel({
     required this.id,
     required this.nombre,
@@ -14,7 +13,6 @@ class PetModel {
     required this.edad,
     required this.ownerId,
   });
-
   Map<String, dynamic> toMap() => {
     'id': id,
     'nombre': nombre,
@@ -23,7 +21,6 @@ class PetModel {
     'edad': edad,
     'ownerId': ownerId,
   };
-
   factory PetModel.fromMap(Map<String, dynamic> map) => PetModel(
     id: map['id'] ?? '',
     nombre: map['nombre'] ?? '',

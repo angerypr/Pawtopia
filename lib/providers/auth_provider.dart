@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
-
 class AuthProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
-
   UserModel? _user;
   bool _isLoading = false;
   String? _errorMessage;
-
   UserModel? get user => _user;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get isLoggedIn => _user != null;
-
   Future<bool> register({
     required String nombre,
     required String email,
@@ -23,7 +19,6 @@ class AuthProvider extends ChangeNotifier {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
-
     try {
       _user = await _authService.register(
         nombre: nombre,
@@ -41,7 +36,6 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
-
   Future<bool> login({
     required String email,
     required String password,
@@ -49,7 +43,6 @@ class AuthProvider extends ChangeNotifier {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
-
     try {
       _user = await _authService.login(email: email, password: password);
       _isLoading = false;
@@ -62,18 +55,15 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
-
   Future<void> logout() async {
     await _authService.logout();
     _user = null;
     notifyListeners();
   }
-
   Future<void> loadCurrentUser() async {
     _user = await _authService.getCurrentUser();
     notifyListeners();
   }
-
   String _parseError(String error) {
     if (error.contains('user-not-found')) return 'Usuario no encontrado';
     if (error.contains('wrong-password')) return 'Contraseña incorrecta';

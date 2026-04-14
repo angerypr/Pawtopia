@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../models/service_model.dart';
-
 class ServiceDetailScreen extends StatelessWidget {
   final ServiceModel service;
-
   const ServiceDetailScreen({super.key, required this.service});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +55,9 @@ class ServiceDetailScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            // Future feature: Agendar
             /*
             ElevatedButton(
               onPressed: () {
-                // Persona 3 implementará Agendar
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),

@@ -4,7 +4,6 @@ class ServiceModel {
   final String descripcion;
   final double precio;
   final int duracion;
-
   ServiceModel({
     required this.id,
     required this.nombre,
@@ -12,7 +11,6 @@ class ServiceModel {
     required this.precio,
     required this.duracion,
   });
-
   Map<String, dynamic> toMap() => {
     'id': id,
     'nombre': nombre,
@@ -20,7 +18,6 @@ class ServiceModel {
     'precio': precio,
     'duracion': duracion,
   };
-
   factory ServiceModel.fromMap(Map<String, dynamic> map) => ServiceModel(
     id: map['id'] ?? '',
     nombre: map['nombre'] ?? '',

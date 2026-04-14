@@ -5,15 +5,12 @@ import '../../providers/pet_provider.dart';
 import '../../models/pet_model.dart';
 import 'add_pet_screen.dart';
 import 'edit_pet_screen.dart';
-
 class MyPetsScreen extends StatelessWidget {
   const MyPetsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final authProvider = context.read<AuthProvider>();
     final userId = authProvider.user?.id ?? '';
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mis Mascotas'),
@@ -29,12 +26,10 @@ class MyPetsScreen extends StatelessWidget {
                 if (snapshot.hasError) {
                   return const Center(child: Text('Error al cargar mascotas.'));
                 }
-
                 final pets = snapshot.data ?? [];
                 if (pets.isEmpty) {
                   return const Center(child: Text('No tienes mascotas registradas.'));
                 }
-
                 return ListView.builder(
                   itemCount: pets.length,
                   itemBuilder: (context, index) {

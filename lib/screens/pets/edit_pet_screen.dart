@@ -2,40 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/pet_provider.dart';
 import '../../models/pet_model.dart';
-
 class EditPetScreen extends StatefulWidget {
   final PetModel pet;
-
   const EditPetScreen({super.key, required this.pet});
-
   @override
   State<EditPetScreen> createState() => _EditPetScreenState();
 }
-
 class _EditPetScreenState extends State<EditPetScreen> {
   final _formKey = GlobalKey<FormState>();
   late String _nombre;
   late String _tipo;
   late String _raza;
   late int _edad;
-
   final List<String> _tiposMascota = ['Perro', 'Gato', 'Ave', 'Otro'];
-
   @override
   void initState() {
     super.initState();
     _nombre = widget.pet.nombre;
-    // Si el tipo de la db no está en la lista estándar, asumimos 'Otro' temporalmente.
     _tipo = _tiposMascota.contains(widget.pet.tipo) ? widget.pet.tipo : 'Otro';
     _raza = widget.pet.raza;
     _edad = widget.pet.edad;
   }
-
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       final petProvider = context.read<PetProvider>();
-
       final updatedPet = PetModel(
         id: widget.pet.id,
         nombre: _nombre,
@@ -44,7 +35,6 @@ class _EditPetScreenState extends State<EditPetScreen> {
         edad: _edad,
         ownerId: widget.pet.ownerId,
       );
-
       try {
         await petProvider.updatePet(updatedPet);
         if (mounted) {
@@ -62,7 +52,6 @@ class _EditPetScreenState extends State<EditPetScreen> {
       }
     }
   }
-
   Future<void> _delete() async {
     final petProvider = context.read<PetProvider>();
     try {
@@ -71,7 +60,7 @@ class _EditPetScreenState extends State<EditPetScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Mascota eliminada')),
         );
-        Navigator.pop(context); // Regresa a la lista
+        Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
@@ -81,11 +70,9 @@ class _EditPetScreenState extends State<EditPetScreen> {
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final isLoading = context.watch<PetProvider>().isLoading;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar Mascota'),
